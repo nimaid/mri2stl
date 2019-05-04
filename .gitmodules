@@ -1,0 +1,3 @@
+[submodule "3dprintyourbrain"]
+	path = 3dprintyourbrain
+	url = https://github.com/miykael/3dprintyourbrain.git
