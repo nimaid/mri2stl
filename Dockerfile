@@ -1,7 +1,8 @@
 FROM ubuntu:bionic
 
 RUN apt-get update
-RUN apt-get install -y --no-install-recommends tcsh dcm2niix meshlab python2.7 jupyter wget file libpng-dev libmng-dev bzip2
+RUN apt-get install -y --no-install-recommends tcsh dcm2niix meshlab python2.7 wget file libpng-dev libmng-dev bzip2 python-pip python-setuptools
+RUN python2.7 -m pip --no-cache-dir install --upgrade jupyter
 
 COPY ./downloads /dl_files
 WORKDIR /dl_files
@@ -19,4 +20,5 @@ COPY ./3dprintyourbrain/script /3dprintscript
 COPY ./test_scan.nii /3dprintscript
 WORKDIR /3dprintscript
 
+EXPOSE 8888
 CMD jupyter notebook --ip=0.0.0.0 --port=8888 --no-browser --allow-root && exit
