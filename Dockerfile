@@ -23,7 +23,8 @@ RUN apt-get update && \
     # FreeSurfer installation.
     wget -P /tmp/ https://surfer.nmr.mgh.harvard.edu/pub/dist/freesurfer/6.0.0/freesurfer-Linux-centos6_x86_64-stable-pub-v6.0.0.tar.gz && \
     tar -C /usr/local -xzvf /tmp/freesurfer-Linux-centos6_x86_64-stable-pub-v6.0.0.tar.gz && \
-    /usr/local/freesurfer/SetUpFreeSurfer.sh && \
+    export FREESURFER_HOME=/usr/local/freesurfer && \
+    $FREESURFER_HOME/SetUpFreeSurfer.sh && \
     rm -f /tmp/freesurfer-Linux-centos6_x86_64-stable-pub-v6.0.0.tar.gz && \
 
     # FSL installation
