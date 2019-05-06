@@ -2,7 +2,6 @@ FROM ubuntu:bionic
 
 COPY ./files /tmp
 COPY ./3dprintyourbrain/script /3dprintscript
-COPY ./test_scan.nii /3dprintscript/scans/test_scan/input/struct.nii
 
 RUN APT_INSTALL="apt-get install -y --no-install-recommends" && \
     PIP_INSTALL="python2.7 -m pip --no-cache-dir install --upgrade" && \
@@ -24,7 +23,8 @@ RUN APT_INSTALL="apt-get install -y --no-install-recommends" && \
     python2.7 /tmp/fslinstaller.py -D -E -d /usr/local/fsl && \
     rm -f /tmp/fslinstaller.py && \
     
-    mv /3dprintscript/smoothing.mlx /3dprintscript/scans/
+    mv /3dprintscript/smoothing.mlx /3dprintscript/scans/ && \
+    mv /tmp/test_scan.nii /3dprintscript/scans/test_scan/input/struct.nii
 
 EXPOSE 8888
 CMD jupyter notebook --ip=0.0.0.0 --port=8888 --no-browser --allow-root && exit
