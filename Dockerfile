@@ -1,24 +1,30 @@
 FROM ubuntu:bionic
 
-RUN apt-get update
-RUN apt-get install -y --no-install-recommends tcsh dcm2niix meshlab python2.7 wget file libpng-dev libmng-dev bzip2 python-pip python-setuptools
-RUN python2.7 -m pip --no-cache-dir install --upgrade jupyter
-
-COPY ./downloads /dl_files
-WORKDIR /dl_files
-
-RUN tar -C /usr/local -xzvf freesurfer-Linux-centos6_x86_64-stable-pub-v6.0.0.tar.gz
-RUN export FREESURFER_HOME=/usr/local/freesurfer; $FREESURFER_HOME/SetUpFreeSurfer.sh; mv license.txt $FREESURFER_HOME
-
-RUN mv fslinstaller.py /tmp/
-RUN export PYTHONHTTPSVERIFY=0; python2.7 /tmp/fslinstaller.py -D -E -d /usr/local/fsl
-
-WORKDIR /
-RUN rm -rf dl_files/
-
+COPY ./files /tmp
 COPY ./3dprintyourbrain/script /3dprintscript
-COPY ./test_scan.nii /3dprintscript
-WORKDIR /3dprintscript
+COPY ./test_scan.nii /3dprintscript/scans/test_scan/input/struct.nii
+
+RUN APT_INSTALL="apt-get install -y --no-install-recommends" && \
+    PIP_INSTALL="python2.7 -m pip --no-cache-dir install --upgrade" && \
+    GIT_CLONE="git clone --depth 10" && \
+
+    apt-get update && \
+    $APT_INSTALL tcsh dcm2niix meshlab python2.7 wget file libpng-dev libmng-dev bzip2 python-pip python-setuptools && \
+    $PIP_INSTALL jupyter && \
+    
+    wget https://surfer.nmr.mgh.harvard.edu/pub/dist/freesurfer/6.0.0/freesurfer-Linux-centos6_x86_64-stable-pub-v6.0.0.tar.gz /tmp/ && \
+    tar -C /usr/local -xzvf /tmp/freesurfer-Linux-centos6_x86_64-stable-pub-v6.0.0.tar.gz && \
+    export FREESURFER_HOME=/usr/local/freesurfer && \
+    $FREESURFER_HOME/SetUpFreeSurfer.sh && \
+    mv /tmp/license.txt $FREESURFER_HOME && \
+    rm -f /tmp/freesurfer-Linux-centos6_x86_64-stable-pub-v6.0.0.tar.gz && \
+    
+    wget https://fsl.fmrib.ox.ac.uk/fsldownloads/fslinstaller.py /tmp/ && \
+    export PYTHONHTTPSVERIFY=0 && \
+    python2.7 /tmp/fslinstaller.py -D -E -d /usr/local/fsl && \
+    rm -f /tmp/fslinstaller.py && \
+    
+    mv /3dprintscript/smoothing.mlx /3dprintscript/scans/
 
 EXPOSE 8888
 CMD jupyter notebook --ip=0.0.0.0 --port=8888 --no-browser --allow-root && exit
