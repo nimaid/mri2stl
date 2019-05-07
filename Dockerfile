@@ -14,6 +14,10 @@ RUN apt-get update && \
         file \
         libpng-dev \
         libmng-dev \
+        libgomp1 \
+        libquadmath0 \
+        bc \
+        libsys-hostname-long-perl \
         bzip2 \
         python-pip \
         python-setuptools && \
@@ -36,7 +40,6 @@ RUN apt-get update && \
     # Cleanup.
     apt-get purge -y \
         wget \
-        tcsh \
         file \
         bzip2 \
         python-pip \
