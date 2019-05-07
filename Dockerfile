@@ -35,11 +35,13 @@ RUN apt-get update && \
     
     # Cleanup.
     apt-get purge -y \
-        python2.7 \
         wget \
+        tcsh \
+        file \
         bzip2 \
         python-pip \
-        python-setuptools
+        python-setuptools && \
+    apt-get autoremove -y
 COPY ./files/license.txt /usr/local/freesurfer/
 
 # Copy files.
