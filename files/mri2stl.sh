@@ -1,4 +1,6 @@
 #!/bin/bash
 export FREESURFER_HOME=/usr/local/freesurfer
 source $FREESURFER_HOME/SetUpFreeSurfer.sh
-./3Dprinting_brain.sh $1 $2 /usr/bin
+
+export PRINTDIR=/3dprintscript
+$PRINTDIR/3Dprinting_brain.sh $PRINTDIR/scans $1 /usr/bin
