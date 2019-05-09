@@ -1,13 +1,13 @@
 # mri2stl
 A Docker image for converting head MRI data to a 3D surface model of the brain.
 
-Install Docker for your platform. Then, you can run this with:
+Install Docker for your platform. Docker will automatically download the latest version of the program if it's not on your local computer. You can run the server as follows:
 
 **CTRL-C kills server:** `docker run --rm -it -p 8888:8888 nimaid/mri2stl`
 
 **CTRL-C sends to BG (kill server manually):** `docker run --rm -p 8888:8888 nimaid/mri2stl`
 
-You should get something like the following:
+After Docker download the latest image, you should get something like the following:
 ```
 [I 22:39:57.565 NotebookApp] Writing notebook server cookie secret to /root/.local/share/jupyter/runtime/notebook_cookie_secret
 [I 22:39:57.728 NotebookApp] Serving notebooks from local directory: /3dprintscript
