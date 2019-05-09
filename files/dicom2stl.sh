@@ -12,8 +12,11 @@ then
     mv $FILENAME $NEWDIR
     unzip $NEWDIR/$BASENAME -d $NEWDIR
     rm $NEWDIR/$BASENAME
-
-    $PRINTDIR/dicom2nii.sh $SCANNAME
+    
+    dcm2niix $NEWDIR
+    mkdir -p $NEWDIR/input
+    mv $NEWDIR/*.nii $NEWDIR/input/struct.nii
+    rm $NEWDIR/*
 
     $PRINTDIR/mri2stl.sh $SCANNAME
 
