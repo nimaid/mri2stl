@@ -6,6 +6,7 @@ FROM ubuntu:bionic
 # Install required software.
 RUN apt-get update && \
     apt-get install -y --no-install-recommends \
+        unzip \
         tcsh \
         dcm2niix \
         meshlab \
@@ -51,6 +52,7 @@ COPY ./files/license.txt /usr/local/freesurfer/
 COPY ./3dprintyourbrain/script/3Dprinting_brain.sh /3dprintscript/
 COPY ./files/mri2stl.sh /3dprintscript/
 COPY ./files/dicom2nii.sh /3dprintscript/
+COPY ./files/zip2stl.sh /3dprintscript/
 COPY ./3dprintyourbrain/script/smoothing.mlx /3dprintscript/scans/
 COPY ./files/test_scan.nii /3dprintscript/scans/test_scan/input/struct.nii
 
