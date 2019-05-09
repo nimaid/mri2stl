@@ -3,9 +3,9 @@ A Docker image for converting head MRI data to a 3D surface model of the brain.
 
 Install Docker for your platform. Then, you can run this with:
 
-CTRL-C kills server: `docker run --rm -it -p 8888:8888 nimaid/mri2stl`
+**CTRL-C kills server:** `docker run --rm -it -p 8888:8888 nimaid/mri2stl`
 
-CTRL-C sends to BG (kill server manually): `docker run --rm -p 8888:8888 nimaid/mri2stl`
+**CTRL-C sends to BG (kill server manually):** `docker run --rm -p 8888:8888 nimaid/mri2stl`
 
 You should get something like the following:
 ```
