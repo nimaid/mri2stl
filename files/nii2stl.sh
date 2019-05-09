@@ -8,12 +8,15 @@ NEWDIR=$PRINTDIR/scans/$SCANNAME
 
 if [[ $BASENAME == *.nii ]]
 then
+    # Move the .nii to the correct place
     mkdir -p $NEWDIR/input
     mv $FILENAME $NEWDIR/input/struct.nii
-
+    
+    # Run FreeSurfer on the .nii file
     $PRINTDIR/mri2stl.sh $SCANNAME
-
-    #mv $NEWDIR/output/final_s.stl $PRINTDIR/brain_$SCANNAME.stl
+    
+    # Copy the final output to the main directory
+    cp $NEWDIR/output/final_s.stl $PRINTDIR/brain_$SCANNAME.stl
 else
     echo "File is not a *.nii file."
 fi

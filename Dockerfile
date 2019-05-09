@@ -54,7 +54,7 @@ COPY ./files/mri2stl.sh /3dprintscript/
 COPY ./files/nii2stl.sh /3dprintscript/
 COPY ./files/dicom2stl.sh /3dprintscript/
 COPY ./3dprintyourbrain/script/smoothing.mlx /3dprintscript/scans/
-COPY ./files/test_scan.nii /3dprintscript/scans/test_scan/input/struct.nii
+COPY ./files/test_scan.zip /3dprintscript/
 
 # Prepare Jupyter Notebook server.
 WORKDIR /3dprintscript
