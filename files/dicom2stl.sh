@@ -28,11 +28,8 @@ else
         # Remove DICOM images
         rm $NEWDIR/*
         
-        # Run FreeSurfer on the .nii file
+        # Convert the .nii file to an .stl file
         $PRINTDIR/mri2stl.sh $SCANNAME
-        
-        # Copy the final output to the main directory
-        cp $NEWDIR/output/final_s.stl $PRINTDIR/brain_$SCANNAME.stl
     else
         echo "File is not a *.zip file."
     fi

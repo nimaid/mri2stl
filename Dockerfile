@@ -6,6 +6,7 @@ FROM ubuntu:bionic
 # Install required software.
 RUN apt-get update && \
     apt-get install -y --no-install-recommends \
+        xvfb \
         unzip \
         tcsh \
         dcm2niix \
@@ -49,11 +50,11 @@ RUN apt-get update && \
 COPY ./files/freesurfer_license.txt /usr/local/freesurfer/license.txt
 
 # Copy files.
-COPY ./3dprintyourbrain/script/3Dprinting_brain.sh /3dprintscript/
+COPY ./files/3Dprinting_brain.sh /3dprintscript/
+COPY ./files/smoothing.mlx /3dprintscript/scans/
 COPY ./files/mri2stl.sh /3dprintscript/
 COPY ./files/nii2stl.sh /3dprintscript/
 COPY ./files/dicom2stl.sh /3dprintscript/
-COPY ./3dprintyourbrain/script/smoothing.mlx /3dprintscript/scans/
 COPY ./files/test_scan.zip /3dprintscript/
 
 # Prepare Jupyter Notebook server.

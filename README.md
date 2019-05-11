@@ -1,6 +1,9 @@
 # mri2stl
 A Docker image for converting head MRI data to a 3D surface model of the brain.
 
+[Modified from miykael/3dprintyourbrain](https://github.com/miykael/3dprintyourbrain)
+
+## Instructions
 Install Docker for your platform. Docker will automatically download the latest version of the image if it's not already on your local computer. You can run the server as follows:
 
 **CTRL-C kills server:** `docker run --rm -it -p 8888:8888 nimaid/mri2stl`
@@ -28,7 +31,6 @@ Copy the `127.0.0.1` and everything after it. Then paste it into your web browse
 The URL should look something like this: `127.0.0.1:8888/?token=b9596f04a97c1ae9c2b02dd1877568f5ea20c805aa1199fa`. Go ahead and go to the URL.
 
 If it all worked well, you should see the "Jupyter" logo up top, and a list of files.
-
 
 Now, in the upper right, click `New > Terminal`. Here, you can use the following scripts to create STLs of the surface of the brain from medical imaging data:
 * dicom2stl.sh
