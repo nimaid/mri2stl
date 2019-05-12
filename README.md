@@ -38,7 +38,7 @@ Now, in the upper right, click `New > Terminal`. Here, you can use the following
 * nii2stl.sh
   * Takes a .nii file with the NIfTI images from a head study in the parent directory.
 * mri2stl.sh
-  * If you had run nii2stl or dicom2stl and the job got interrupted, you can restart the job by passing just the name (no .nii or .zip) of the file you passed in.
+  * If you had run `nii2stl.sh` or `dicom2stl.sh` and the job got interrupted, you can restart the job by passing just the name (no .nii or .zip) of the file you passed in.
   * So if you ran `dicom2stl.sh SE000004.zip`, you could re-start that job from the beginning with `mri2stl.sh SE000004`.
 Both of these scripts, if they complete successfully, should copy the final .stl to the main directory, `brain_*.stl`, where `*` is the name of the input file. It is possible that a very small (<1kb) .stl file will be returned if an error occurs, please disregard any files less than a few kilobytes.
 
