@@ -32,16 +32,16 @@ The URL should look something like this: `127.0.0.1:8888/?token=b9596f04a97c1ae9
 
 If it all worked well, you should see the "Jupyter" logo up top, and a list of files.
 
-Now, in the upper right, click `New > Terminal`. Here, you can use the following scripts to create an .stl of the surface of the brain from medical imaging data:
-* dicom2stl.sh
+Now, in the upper right, click `New > Terminal`. Here, you can use the following commands to create an .stl of the surface of the brain from medical imaging data:
+* dicom2stl
   * Takes a .zip file with the DICOM images from a head study in the parent directory.
-* nii2stl.sh
+* nii2stl
   * Takes a .nii file with the NIfTI images from a head study in the parent directory.
-* mri2stl.sh
-  * If you had run `nii2stl.sh` or `dicom2stl.sh` and the job got interrupted, you can restart the job by passing just the name (no .nii or .zip) of the file you passed in.
+* mri2stl
+  * If you had run `nii2stl` or `dicom2stl` and the job got interrupted, you can restart the job by passing just the name (no .nii or .zip) of the file you passed in.
   * So if you ran `dicom2stl.sh SE000004.zip`, you could re-start that job from the beginning with `mri2stl.sh SE000004`.
 
-All of these scripts, if they complete successfully, should copy the final .stl to the main directory, `brain_[NAME]_[CORTICAL]_[SMOOTH].stl`, where:
+All of these commands, if they complete successfully, should copy the final .stl to the main directory, `brain_[NAME]_[CORTICAL]_[SMOOTH].stl`, where:
 * `[NAME]` is the name of the input file.
 * `[CORTICAL]` is ether
   * `cortical` if only the cortical structure was captured.
@@ -52,7 +52,7 @@ All of these scripts, if they complete successfully, should copy the final .stl 
 
 You can test the program by running the following command:
 
-`./dicom2stl.sh test_scan.zip`
+`dicom2stl test_scan.zip`
 
 This will take quite a few hours to complete (I have yet to `time` it). I recommend you configure your Docker daemon to use most if not all of your CPU's cores.
 

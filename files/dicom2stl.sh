@@ -28,8 +28,8 @@ else
         # Remove DICOM images
         rm $NEWDIR/*
         
-        # Convert the .nii file to an .stl file
-        $PRINTDIR/mri2stl.sh $SCANNAME
+        # Convert the prepared file to an .stl file
+        mri2stl $SCANNAME
     else
         echo "File is not a *.zip file."
     fi

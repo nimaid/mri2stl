@@ -16,8 +16,8 @@ else
         mkdir -p $NEWDIR/input
         mv $FILENAME $NEWDIR/input/struct.nii
         
-        # Convert the .nii file to an .stl file
-        $PRINTDIR/mri2stl.sh $SCANNAME
+        # Convert the prepared file to an .stl file
+        mri2stl $SCANNAME
     else
         echo "File is not a *.nii file."
     fi

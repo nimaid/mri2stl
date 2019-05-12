@@ -50,11 +50,11 @@ RUN apt-get update && \
 COPY ./files/freesurfer_license.txt /usr/local/freesurfer/license.txt
 
 # Copy files.
-COPY ./files/3Dprinting_brain.sh /3dprintscript/
 COPY ./files/smoothing.mlx /3dprintscript/scans/
-COPY ./files/mri2stl.sh /3dprintscript/
-COPY ./files/nii2stl.sh /3dprintscript/
-COPY ./files/dicom2stl.sh /3dprintscript/
+COPY ./files/3Dprinting_brain.sh /usr/bin/3Dprinting_brain
+COPY ./files/mri2stl.sh /usr/bin/mri2stl
+COPY ./files/nii2stl.sh /usr/bin/nii2stl
+COPY ./files/dicom2stl.sh /usr/bin/dicom2stl
 COPY ./files/test_scan.zip /3dprintscript/
 
 # Prepare Jupyter Notebook server.

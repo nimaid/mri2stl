@@ -15,7 +15,7 @@ else
     if [ -d "$SCANDIR" ];
     then
         # Run the conversion
-        $PRINTDIR/3Dprinting_brain.sh $WORKDIR $SCANNAME /usr/bin
+        3Dprinting_brain $WORKDIR $SCANNAME /usr/bin
         
         # Alright, now let's check the results.
         BADOUT="MRI2STL ERROR: Program did not produce any usable output. Check the logs above for errors."
