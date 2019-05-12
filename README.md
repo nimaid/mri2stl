@@ -33,11 +33,11 @@ The URL should look something like this: `127.0.0.1:8888/?token=b9596f04a97c1ae9
 If it all worked well, you should see the "Jupyter" logo up top, and a list of files.
 
 Now, in the upper right, click `New > Terminal`. Here, you can use the following commands to create an .stl of the surface of the brain from medical imaging data:
-* dicom2stl
+* `dicom2stl`
   * Takes a .zip file with the DICOM images from a head study in the parent directory.
-* nii2stl
+* `nii2stl`
   * Takes a .nii file with the NIfTI images from a head study in the parent directory.
-* mri2stl
+* `mri2stl`
   * If you had run `nii2stl` or `dicom2stl` and the job got interrupted, you can restart the job by passing just the name (no .nii or .zip) of the file you passed in.
   * So if you ran `dicom2stl.sh SE000004.zip`, you could re-start that job from the beginning with `mri2stl.sh SE000004`.
 
