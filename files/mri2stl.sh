@@ -24,7 +24,7 @@ else
         if [ ! -f "$OUTDIR/final.stl" ]
         then
             echo $BADOUT
-            return -1
+            exit -1
         fi
         
         # Output created, is it garbage?
@@ -32,7 +32,7 @@ else
         if [ $FILESIZE -lt 1024 ]
         then
             echo $BADOUT
-            return -1
+            exit -1
         fi
         
         # Seemingly good raw output is there.
@@ -40,7 +40,7 @@ else
         if [ ! -f "$OUTDIR/cortical.stl" ]
         then
             echo $BADOUT
-            return -1
+            exit -1
         fi
         
         # Okay, so we have a valid cortical model at least.
