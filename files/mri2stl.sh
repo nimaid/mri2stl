@@ -29,6 +29,7 @@ else
             echo "Coppied the unsmoothed final .stl to main directory, run laplacian smoothing manually."
         else
             echo "ERROR: Program did not produce any usable output. Check for errors above."
+        fi
     else
         echo "ERROR: Scan directory does not exist in /3dprintscript/scans/."
     fi

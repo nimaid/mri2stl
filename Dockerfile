@@ -60,4 +60,4 @@ COPY ./files/test_scan.zip /3dprintscript/
 # Prepare Jupyter Notebook server.
 WORKDIR /3dprintscript
 EXPOSE 8888
-CMD jupyter notebook --ip=0.0.0.0 --port=8888 --no-browser --allow-root && exit
+CMD export SHELL=/bin/bash && jupyter notebook --ip=0.0.0.0 --port=8888 --no-browser --allow-root && exit
