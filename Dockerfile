@@ -13,14 +13,14 @@ RUN apt-get update && \
         dcm2niix \
         meshlab \
         python2.7 \
-        wget \
-        file \
         libpng-dev \
         libmng-dev \
         libgomp1 \
         libquadmath0 \
         bc \
         libsys-hostname-long-perl \
+        wget \
+        file \
         bzip2 \
         python-pip \
         python-setuptools && \
