@@ -1,7 +1,7 @@
 #!/bin/bash
 if [ $# -ne 1 ]
 then
-  echo "ERROR: mri2stl takes exactly 1 argument, the name of the subdirectory in /3dprintscript/scans/."
+  echo "MRI2STL ERROR: program takes exactly 1 argument, the name of the subdirectory in /3dprintscript/scans/."
 else
     SCANNAME=$1
     PRINTDIR=/3dprintscript
@@ -17,19 +17,103 @@ else
         # Run the conversion
         $PRINTDIR/3Dprinting_brain.sh $WORKDIR $SCANNAME /usr/bin
         
-        # Copy the final output to the main directory
+        # Alright, now let's check the results.
+        BADOUT="MRI2STL ERROR: Program did not produce any usable output. Check the logs above for errors."
+        
+        # Is there even a final output?
+        if [ ! -f "$OUTDIR/final.stl" ]
+        then
+            echo $BADOUT
+            return -1
+        fi
+        
+        # Output created, is it garbage?
+        FILESIZE=$(wc -c < $OUTDIR/final.stl)
+        if [ $FILESIZE -lt 1024 ]
+        then
+            echo $BADOUT
+            return -1
+        fi
+        
+        # Seemingly good raw output is there.
+        # Let's double check that the cortical model is there, too.
+        if [ ! -f "$OUTDIR/cortical.stl" ]
+        then
+            echo $BADOUT
+            return -1
+        fi
+        
+        # Okay, so we have a valid cortical model at least.
+        # Did the program capture the subcortical structures?
+        if [ -f "$OUTDIR/subcortical.stl" ]
+        then
+            SUBCORT=1
+        else
+            SUBCORT=0
+        fi
+            
+        # Got it. Now, do we have a smoothed output?
         if [ -f "$OUTDIR/final_s.stl" ]
         then
-            cp $SCANDIR/output/final_s.stl $PRINTDIR/brain_${SCANNAME}.stl
-            echo "Coppied final smoothed .stl to main directory!"
-        elif [ -f "$OUTDIR/final.stl" ]
-        then
-            cp $SCANDIR/output/final.stl $PRINTDIR/brain_${SCANNAME}_raw.stl
-            echo "Smoothed output not found."
-            echo "Coppied the unsmoothed final .stl to main directory, run laplacian smoothing manually."
+            # Is the smoothed output garbage?
+            FILESIZE=$(wc -c < $OUTDIR/final_s.stl)
+            if [ $FILESIZE -lt 1024 ]
+            then
+                SMOOTH=0
+            else
+                SMOOTH=1
+            fi
         else
-            echo "ERROR: Program did not produce any usable output. Check for errors above."
+            SMOOTH=0
         fi
+
+        # Now let's figure out path names and prints
+        TOPATH=brain_${SCANNAME}
+        if [ $SUBCORT -eq 1 ]
+        then
+            TOPATH=${TOPATH}_cort+subcort
+        else
+            TOPATH=${TOPATH}_cortical
+        fi
+        
+        if [ $SMOOTH -eq 1 ]
+        then
+            FROMPATH=$OUTDIR/final_s.stl
+            TOPATH=${TOPATH}_smoothed.stl
+        else
+            FROMPATH=$OUTDIR/final.stl
+            TOPATH=${TOPATH}_raw.stl
+        fi
+        
+        # Perform the copy
+        cp $FROMPATH $PRINTDIR/$TOPATH
+        
+        # Print what happend.
+        printf "\n\n\n"
+        echo "~~~~~~~~~~~~~~~~ MRI2STL RESULTS ~~~~~~~~~~~~~~~~"
+        
+        if [ $SUBCORT -eq 1 ]
+        then
+            echo "Both the cortical and subcortical strucures"
+            echo "were successfully captured."
+        else
+            echo "The cortical structure was successfully"
+            echo "captured, but the subcortical structure"
+            echo "could not be captured."
+        fi
+        
+        printf "\n"
+        if [ $SMOOTH -eq 1 ]
+        then
+            echo "The final output was able to be smoothed."
+        else
+            echo "The final output could not be smoothed."
+            echo "You may wish to run laplacian smoothing"
+            echo "manually to get a cleaner look."
+        fi
+        
+        printf "\n"
+        printf "The final output was saved to \"%s\"\n" $TOPATH
     else
         echo "ERROR: Scan directory does not exist in /3dprintscript/scans/."
     fi
