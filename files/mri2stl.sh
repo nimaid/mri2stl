@@ -88,13 +88,13 @@ else
         # Perform the copy
         cp $FROMPATH $PRINTDIR/$TOPATH
         
-        # Print what happend.
+        # Print what happened.
         printf "\n\n\n"
         echo "~~~~~~~~~~~~~~~~ MRI2STL RESULTS ~~~~~~~~~~~~~~~~"
         
         if [ $SUBCORT -eq 1 ]
         then
-            echo "Both the cortical and subcortical strucures"
+            echo "Both the cortical and subcortical structures"
             echo "were successfully captured."
         else
             echo "The cortical structure was successfully"

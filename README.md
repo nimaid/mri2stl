@@ -32,7 +32,7 @@ The URL should look something like this: `127.0.0.1:8888/?token=b9596f04a97c1ae9
 
 If it all worked well, you should see the "Jupyter" logo up top, and a list of files.
 
-Now, in the upper right, click `New > Terminal`. Here, you can use the following scripts to create STLs of the surface of the brain from medical imaging data:
+Now, in the upper right, click `New > Terminal`. Here, you can use the following scripts to create an .stl of the surface of the brain from medical imaging data:
 * dicom2stl.sh
   * Takes a .zip file with the DICOM images from a head study in the parent directory.
 * nii2stl.sh
@@ -40,7 +40,15 @@ Now, in the upper right, click `New > Terminal`. Here, you can use the following
 * mri2stl.sh
   * If you had run `nii2stl.sh` or `dicom2stl.sh` and the job got interrupted, you can restart the job by passing just the name (no .nii or .zip) of the file you passed in.
   * So if you ran `dicom2stl.sh SE000004.zip`, you could re-start that job from the beginning with `mri2stl.sh SE000004`.
-Both of these scripts, if they complete successfully, should copy the final .stl to the main directory, `brain_*.stl`, where `*` is the name of the input file. It is possible that a very small (<1kb) .stl file will be returned if an error occurs, please disregard any files less than a few kilobytes.
+
+All of these scripts, if they complete successfully, should copy the final .stl to the main directory, `brain_[NAME]_[CORTICAL]_[SMOOTH].stl`, where:
+* `[NAME]` is the name of the input file.
+* `[CORTICAL]` is ether
+  * `cortical` if only the cortical structure was captured.
+  * `cortsubcort` if both the cortical and subcortical structures were captured.
+* `[SMOOTH]` is whether the output could have laplacian smoothing applied.
+  * `smooth` if smoothed
+  * `raw` if smoothing failed
 
 You can test the program by running the following command:
 
