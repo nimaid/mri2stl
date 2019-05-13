@@ -128,9 +128,10 @@ then
     stl_boolean -a $SUBJECTS_DIR/cortical.stl -b $SUBJECTS_DIR/subcortical.stl -u $SUBJECTS_DIR/final.stl
 
     # If it failed, do it the linux way
-    echo "stl_boolean union failed, performing simple concatenation..."
     if [ ! -f $SUBJECTS_DIR/final.stl ]
     then
+        echo "[3Dprinting_brain] stl_boolean union failed, performing simple concatenation..."
+        
         echo 'solid '$SUBJECTS_DIR'/final.stl' > $SUBJECTS_DIR/final.stl
         sed '/solid vcg/d' $SUBJECTS_DIR/cortical.stl >> $SUBJECTS_DIR/final.stl
         sed '/solid vcg/d' $SUBJECTS_DIR/subcortical.stl >> $SUBJECTS_DIR/final.stl
