@@ -28,14 +28,14 @@ RUN apt-get update && \
         jupyter && \
 
     # FreeSurfer installation.
-    wget -q --show-progress --no-check-certificate -P /tmp/ https://surfer.nmr.mgh.harvard.edu/pub/dist/freesurfer/6.0.0/freesurfer-Linux-centos6_x86_64-stable-pub-v6.0.0.tar.gz && \
+    wget --no-check-certificate -P /tmp/ https://surfer.nmr.mgh.harvard.edu/pub/dist/freesurfer/6.0.0/freesurfer-Linux-centos6_x86_64-stable-pub-v6.0.0.tar.gz && \
     tar -C /usr/local -xzvf /tmp/freesurfer-Linux-centos6_x86_64-stable-pub-v6.0.0.tar.gz && \
     export FREESURFER_HOME=/usr/local/freesurfer && \
     $FREESURFER_HOME/SetUpFreeSurfer.sh && \
     rm -f /tmp/freesurfer-Linux-centos6_x86_64-stable-pub-v6.0.0.tar.gz && \
 
     # FSL installation
-    wget -q --show-progress --no-check-certificate -P /tmp/ https://fsl.fmrib.ox.ac.uk/fsldownloads/fslinstaller.py && \
+    wget --no-check-certificate -P /tmp/ https://fsl.fmrib.ox.ac.uk/fsldownloads/fslinstaller.py && \
     export PYTHONHTTPSVERIFY=0 && \
     python2.7 /tmp/fslinstaller.py -D -E -d /usr/local/fsl && \
     rm -f /tmp/fslinstaller.py && \
