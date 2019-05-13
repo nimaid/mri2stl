@@ -50,7 +50,7 @@ RUN apt-get update && \
     ldconfig && \
     apt-get clean -y && \
     apt-get autoremove -y && \
-    rm -rf /var/lib/apt/lists/* /tmp/* ~/*
+    rm -rf /var/lib/apt/lists/* /tmp/*
 COPY ./files/freesurfer_license.txt /usr/local/freesurfer/license.txt
 
 # Copy files.
