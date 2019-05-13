@@ -15,20 +15,20 @@ else
     then
         (
         # Move, unzip, and delete DICOM image archive
-        mkdir -p $NEWDIR
-        mv $FILENAME $NEWDIR
+        mkdir -v -p $NEWDIR
+        mv -v $FILENAME $NEWDIR
         unzip $NEWDIR/$BASENAME -d $NEWDIR
-        rm $NEWDIR/$BASENAME
+        rm -v $NEWDIR/$BASENAME
         
         # Convert the DICOM images to a .nii file
         dcm2niix $NEWDIR
         
         # Move the .nii to the correct place
-        mkdir -p $NEWDIR/input
-        mv $NEWDIR/*.nii $NEWDIR/input/struct.nii
+        mkdir -v -p $NEWDIR/input
+        mv -v $NEWDIR/*.nii $NEWDIR/input/struct.nii
         
         # Remove DICOM images
-        rm $NEWDIR/*
+        rm -v $NEWDIR/*
         
         # Convert the prepared file to an .stl file
         mri2stl $SCANNAME

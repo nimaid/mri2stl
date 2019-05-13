@@ -15,8 +15,8 @@ else
     then
         (
         # Move the .nii to the correct place
-        mkdir -p $NEWDIR/input
-        mv $FILENAME $NEWDIR/input/struct.nii
+        mkdir -v -p $NEWDIR/input
+        mv -v $FILENAME $NEWDIR/input/struct.nii
         
         # Convert the prepared file to an .stl file
         mri2stl $SCANNAME
