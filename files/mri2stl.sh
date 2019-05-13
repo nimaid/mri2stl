@@ -132,6 +132,8 @@ else
         printf "\n"
         printf "Conversion took %s.\n" "$(timer)"
         printf "The final output was saved to \"%s\"\n" $TOPATH
+        
+        echo "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
     else
         echo "ERROR: Scan directory does not exist in /3dprintscript/scans/."
     fi
