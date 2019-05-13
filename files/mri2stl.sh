@@ -130,7 +130,7 @@ else
         fi
         
         printf "\n"
-        printf "Conversion took %s.\n" "$(timer)"
+        printf "The conversion took %s.\n" "$(timer)"
         printf "The final output was saved to \"%s\"\n" $TOPATH
         
         echo "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
