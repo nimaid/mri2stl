@@ -6,7 +6,7 @@ SCANNAME=${BASENAME%%.*}
 PRINTDIR=/3dprintscript
 NEWDIR=$PRINTDIR/scans/$SCANNAME
 LOGFILE=$PRINTDIR/${SCANNAME}_log.txt
-$DICOMDIR=$NEWDIR/dicom
+DICOMDIR=$NEWDIR/dicom
 
 if [ $# -ne 1 ]
 then
