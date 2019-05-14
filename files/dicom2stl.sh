@@ -6,6 +6,7 @@ SCANNAME=${BASENAME%%.*}
 PRINTDIR=/3dprintscript
 NEWDIR=$PRINTDIR/scans/$SCANNAME
 LOGFILE=$PRINTDIR/${SCANNAME}_log.txt
+$DICOMDIR=$NEWDIR/dicom
 
 if [ $# -ne 1 ]
 then
@@ -15,20 +16,20 @@ else
     then
         (
         # Move, unzip, and delete DICOM image archive
-        mkdir -v -p $NEWDIR
+        mkdir -v -p $DICOMDIR
         mv -v $FILENAME $NEWDIR
-        unzip $NEWDIR/$BASENAME -d $NEWDIR
+        unzip $NEWDIR/$BASENAME -d $DICOMDIR
         rm -v $NEWDIR/$BASENAME
         
         # Convert the DICOM images to a .nii file
-        dcm2niix $NEWDIR
+        dcm2niix $DICOMDIR
         
         # Move the .nii to the correct place
         mkdir -v -p $NEWDIR/input
-        mv -v $NEWDIR/*.nii $NEWDIR/input/struct.nii
+        mv -v $DICOMDIR/*.nii $NEWDIR/input/struct.nii
         
         # Remove DICOM images
-        rm -v $NEWDIR/*
+        rm -v -r $DICOMDIR
         
         # Convert the prepared file to an .stl file
         mri2stl $SCANNAME
