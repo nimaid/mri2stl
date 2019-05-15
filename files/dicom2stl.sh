@@ -24,9 +24,12 @@ else
         # Convert the DICOM images to a .nii file
         dcm2niix $DICOMDIR
         
+        # Find out the name of the largest .nii file
+        TARGETNII=$(find $DICOMDIR/*.nii -type f -printf "%s\t%p\n" | sort -n | tail -1 | sed "s~^.*${DICOMDIR}~${DICOMDIR}~")
+        
         # Move the .nii to the correct place
         mkdir -v -p $NEWDIR/input
-        mv -v $DICOMDIR/*.nii $NEWDIR/input/struct.nii
+        mv -v $TARGETNII $NEWDIR/input/struct.nii
         
         # Remove DICOM images
         rm -v -r $DICOMDIR
