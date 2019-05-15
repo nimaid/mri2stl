@@ -4,7 +4,9 @@ A Docker image for converting head MRI data to a 3D surface model of the brain.
 [Modified from miykael/3dprintyourbrain](https://github.com/miykael/3dprintyourbrain)
 
 ## Instructions
-Install Docker for your platform. Docker will automatically download the latest version of the image if it's not already on your local computer. You can run the server as follows:
+Install Docker for your platform. This will literally be the hardest step of the whole process, and it's different for each OS. You can learn more [here](https://hub.docker.com/), and through Google.
+
+When you try to run an image in Docker, it will automatically download the latest version of that image if it's not already on your local computer. You can run the server as follows:
 
 **CTRL-C kills server:** `docker run --rm -it -p 8888:8888 nimaid/mri2stl` (This is the command in `launch.sh` and `launch.bat`.)
 
