@@ -36,29 +36,31 @@ else
         3Dprinting_brain $WORKDIR $SCANNAME /usr/bin
         
         # Alright, now let's check the results.
-        BADOUT="MRI2STL ERROR: Program did not produce any usable output. Check the logs above for errors."
+        function bad_out {
+            printf "\n\n\n"
+            echo "MRI2STL ERROR: Program did not produce any usable output. Check the logs above for errors."
+            echo "You probably need to use a scan with more slices, better resolution, or clearer brain matter."
+            exit -1
+        }
         
         # Is there even a final output?
         if [ ! -f "$OUTDIR/final.stl" ]
         then
-            echo $BADOUT
-            exit -1
+            bad_out
         fi
         
         # Output created, is it garbage?
         FILESIZE=$(wc -c < $OUTDIR/final.stl)
         if [ $FILESIZE -lt 1024 ]
         then
-            echo $BADOUT
-            exit -1
+            bad_out
         fi
         
         # Seemingly good raw output is there.
         # Let's double check that the cortical model is there, too.
         if [ ! -f "$OUTDIR/cortical.stl" ]
         then
-            echo $BADOUT
-            exit -1
+            bad_out
         fi
         
         # Okay, so we have a valid cortical model at least.
