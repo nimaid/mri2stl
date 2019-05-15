@@ -45,7 +45,7 @@ All of these commands, if they complete successfully, should copy the final .stl
 * `[NAME]` is the name of the input file.
 * `[CORTICAL]` is ether
   * `cortical` if only the cortical structure was captured.
-  * `cortsubcort` if both the cortical and subcortical structures were captured.
+  * `cort+subcort` if both the cortical and subcortical structures were captured.
 * `[SMOOTH]` is whether the output could have laplacian smoothing applied.
   * `smooth` if smoothed
   * `raw` if smoothing failed
@@ -54,7 +54,7 @@ You can test the program by running the following command:
 
 `dicom2stl test_scan.zip`
 
-This will take quite a few hours to complete (I have yet to `time` it). I recommend you configure your Docker daemon to use most if not all of your CPU's cores.
+This will take quite a few hours to complete (anywhere from 8 hours to a couple days depending). I recommend you configure your Docker daemon to use most if not all of your CPU's cores.
 
 If you want to use your own file, use the `Upload` button left of the `New` button. After selecting the file, it will prompt you again in the file browser, click the blue `Upload` button.
 
