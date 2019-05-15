@@ -3,6 +3,8 @@ A Docker image for converting head MRI data to a 3D surface model of the brain.
 
 [Modified from miykael/3dprintyourbrain](https://github.com/miykael/3dprintyourbrain)
 
+<p align="center"><img src="https://github.com/nimaid/mri2stl/raw/master/images/mri2stl.png" width=500px /></p>
+
 ## Instructions
 Install Docker for your platform. This will literally be the hardest step of the whole process, and it's different for each OS. You can learn more [here](https://hub.docker.com/), and through Google.
 
