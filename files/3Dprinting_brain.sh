@@ -122,23 +122,14 @@ mris_convert $SUBJECTS_DIR/subcortical/subcortical $SUBJECTS_DIR/subcortical.stl
 #4. Combine Cortical and Subcortial 3D Models
 #==========================================================================================
 
+# Did the subcortical model get created?
 if [ -f $SUBJECTS_DIR/subcortical.stl ]
 then
-    # Try using stl_cmd
-    stl_boolean -a $SUBJECTS_DIR/cortical.stl -b $SUBJECTS_DIR/subcortical.stl -u $SUBJECTS_DIR/final.stl
-
-    # If it failed, do it the linux way
-    if [ ! -f $SUBJECTS_DIR/final.stl ]
-    then
-        echo "[3Dprinting_brain] stl_boolean union failed, performing simple concatenation..."
-        
-        echo 'solid '$SUBJECTS_DIR'/final.stl' > $SUBJECTS_DIR/final.stl
-        sed '/solid vcg/d' $SUBJECTS_DIR/cortical.stl >> $SUBJECTS_DIR/final.stl
-        sed '/solid vcg/d' $SUBJECTS_DIR/subcortical.stl >> $SUBJECTS_DIR/final.stl
-        echo 'endsolid '$SUBJECTS_DIR'/final.stl' >> $SUBJECTS_DIR/final.stl
-    else
-        echo "[3Dprinting_brain] stl_boolean union succeeded!"
-    fi
+    # Concatenate the files
+    echo 'solid '$SUBJECTS_DIR'/final.stl' > $SUBJECTS_DIR/final.stl
+    sed '/solid vcg/d' $SUBJECTS_DIR/cortical.stl >> $SUBJECTS_DIR/final.stl
+    sed '/solid vcg/d' $SUBJECTS_DIR/subcortical.stl >> $SUBJECTS_DIR/final.stl
+    echo 'endsolid '$SUBJECTS_DIR'/final.stl' >> $SUBJECTS_DIR/final.stl
 else
     # Just copy the cortical model
     cp $SUBJECTS_DIR/cortical.stl $SUBJECTS_DIR/final.stl

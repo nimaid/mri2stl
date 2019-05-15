@@ -6,7 +6,6 @@ FROM ubuntu:bionic
 # Install required software.
 RUN apt-get update && \
     apt-get install -y --no-install-recommends \
-        stlcmd \
         xvfb \
         unzip \
         tcsh \

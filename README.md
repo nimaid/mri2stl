@@ -81,7 +81,7 @@ An example command, to convert the included `DICOM` test scan into a `.stl`, wou
 
 Converting your brain will take quite a few hours to complete (anywhere from 8 hours to a couple days, depending). I recommend you configure your Docker daemon to use most if not all of your CPU's cores.
 
-The conversion process will attempt to run a boolean union on the cortical and subcortical models. If this cannot be done, the meshes are simply concatenated. Both should be read the same to a 3D printer, but the boolean union actually makes everything a single mesh if it succeeds.
+The conversion process concatenates the two cortical hemispheres and subcortical models, then trys to smooth them together. This means that you can seperate your brain into it's seperate parts by using a 3D editing program (like [Blender](https://www.blender.org/)) to seperate the disconnected meshes ("loose parts" in Blender). If you try and print it as a whole, your printer should print just one solid object, no issues.
 
 To download files (like your shiny new `.stl`), tick the box left of the item in question, then click the `Download` button which appears in the upper left.
 
