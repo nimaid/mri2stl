@@ -60,13 +60,13 @@ Find the best image set of your study, using the above rubric. If your image set
 
 When you have either your `DICOM` `.zip` file, or your `NIfTI` `.nii` file ready to go, go back to the Jupyter dashboard. Click the `Upload` button left of the `New` button. After selecting your file, it will prompt you a second time in the file browser, click the blue `Upload` button.
 
-Now, in the upper right, click `New > Terminal`. Here, you can use the following commands to create an .stl of the surface of the brain from medical imaging data:
+Now, in the upper right, click `New > Terminal`. Here, you can use the following commands to create an `.stl` of the surface of the brain from medical imaging data:
 * `dicom2stl`
-  * Takes a .zip file with the `DICOM` images from a head study in the main directory.
+  * Takes a `.zip` file with the `DICOM` images from a head study in the main directory.
 * `nii2stl`
-  * Takes a .nii file with the `NIfTI` images from a head study.
+  * Takes a `.nii` file with the `NIfTI` images from a head study.
 
-All of these commands, if they complete successfully, should copy the final .stl to the main directory, `brain_[NAME]_[CORTICAL]_[SMOOTH].stl`, where:
+All of these commands, if they complete successfully, should copy the final `.stl` to the main directory, `brain_[NAME]_[CORTICAL]_[SMOOTH].stl`, where:
 * `[NAME]` is the name of the input file.
 * `[CORTICAL]` is ether
   * `cortical` if only the cortical structure was captured.
@@ -75,7 +75,7 @@ All of these commands, if they complete successfully, should copy the final .stl
   * `smooth` if smoothed
   * `raw` if smoothing failed
 
-An example command, to convert the included `DICOM` test scan into a surface brain model, would be `dicom2stl test_scan.zip`.
+An example command, to convert the included `DICOM` test scan into a `.stl`, would be `dicom2stl test_scan.zip`.
 
 Converting your brain will take quite a few hours to complete (anywhere from 8 hours to a couple days, depending). I recommend you configure your Docker daemon to use most if not all of your CPU's cores.
 
