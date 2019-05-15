@@ -9,7 +9,17 @@ LOGFILE=$PRINTDIR/${SCANNAME}_log.txt
 DICOMDIR=$NEWDIR/dicom
 
 function find_largest {
-    find $1/$2 -type f -printf "%s\t%p\n" | sort -n | tail -1 | sed "s~^.*${1}~${1}~"
+    target_path=$1
+    target_pattern=$2
+    
+    # Return a list of matches with sizes...
+    find ${target_path}/${target_pattern} -type f -printf "%s\t%p\n" | \
+        # ...then sort (largest will be the last entry now)...
+        sort -n | \
+        # ...then take only the last line (largest)...
+        tail -1 | \
+        # ...and finally, strip the size so only the path remains.
+        sed "s~^.*${target_path}~${target_path}~"
 }
 
 if [ $# -ne 1 ]
