@@ -81,8 +81,6 @@ An example command, to convert the included `DICOM` test scan into a `.stl`, wou
 
 Converting your brain will take quite a few hours to complete (anywhere from 8 hours to a couple days, depending). I recommend you configure your Docker daemon to use most if not all of your CPU's cores.
 
-The conversion process concatenates the two cortical hemispheres and subcortical models, then trys to smooth them together. This means that you can seperate your brain into it's seperate parts by using a 3D editing program (like [Blender](https://www.blender.org/)) to seperate the disconnected meshes ("loose parts" in Blender). If you try and print it as a whole, your printer should print just one solid object, no issues.
-
 To download files (like your shiny new `.stl`), tick the box left of the item in question, then click the `Download` button which appears in the upper left.
 
 Once you have all the files you want to save downloaded, you can kill the server by clicking `Quit` in the upper right corner. When you do this, all files uploaded or created that were not downloaded will be forever lost, so be careful!
@@ -90,3 +88,5 @@ Once you have all the files you want to save downloaded, you can kill the server
 If you close your browser without clicking `Quit`, the image will still be running in the background. You can reconnect by going to the same URL which you initially noted down. (You did note it down, right?)
 
 The other way to kill the server is to shutdown the Docker container manually. You would use `docker ps` to get the ID of it, then `docker rm -f [ID]`. This will also permenently delete all files uploaded/created.
+
+The conversion process concatenates the two cortical hemispheres and subcortical models, then trys to smooth them together. This means that you can seperate your brain into it's seperate parts by using a 3D editing program (like [Blender](https://www.blender.org/)) to seperate the disconnected meshes ("loose parts" in Blender). If you try and print it as a whole, your printer should print just one solid object, no issues.
