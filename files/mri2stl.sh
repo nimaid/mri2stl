@@ -38,8 +38,15 @@ else
         # Alright, now let's check the results.
         function bad_out {
             printf "\n\n\n"
-            echo "MRI2STL ERROR: Program did not produce any usable output. Check the logs above for errors."
-            echo "You probably need to use a scan with more slices, better resolution, or clearer brain matter."
+            echo "~~~~~~~~~~~~~~~~ MRI2STL RESULTS ~~~~~~~~~~~~~~~~"
+            echo "ERROR: Program did not produce any usable output."
+            echo "Check the logs above for errors."
+            
+            printf "\n"
+            echo "You probably need to use a scan with more"
+            echo "slices, better resolution, or clearer brain"
+            echo "matter."
+            echo "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
             exit -1
         }
         
