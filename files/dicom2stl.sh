@@ -8,6 +8,10 @@ NEWDIR=$PRINTDIR/scans/$SCANNAME
 LOGFILE=$PRINTDIR/${SCANNAME}_log.txt
 DICOMDIR=$NEWDIR/dicom
 
+function find_largest {
+    find $1/$2 -type f -printf "%s\t%p\n" | sort -n | tail -1 | sed "s~^.*${1}~${1}~"
+}
+
 if [ $# -ne 1 ]
 then
   echo "ERROR: dicom2stl takes exactly 1 argument, the path to a .zip file of DICOM images."
@@ -25,7 +29,7 @@ else
         dcm2niix $DICOMDIR
         
         # Find out the name of the largest .nii file
-        TARGETNII=$(find $DICOMDIR/*.nii -type f -printf "%s\t%p\n" | sort -n | tail -1 | sed "s~^.*${DICOMDIR}~${DICOMDIR}~")
+        TARGETNII=$(find_largest $DICOMDIR "*.nii")
         
         # Move the .nii to the correct place
         mkdir -v -p $NEWDIR/input
