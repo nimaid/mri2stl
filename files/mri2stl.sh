@@ -44,8 +44,7 @@ else
             
             printf "\n"
             echo "You probably need to use a scan with more"
-            echo "slices, better resolution, or clearer brain"
-            echo "matter."
+            echo "slices, better resolution, or clearer brain matter."
             echo "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
             exit -1
         }
