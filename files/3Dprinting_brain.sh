@@ -136,6 +136,8 @@ then
         sed '/solid vcg/d' $SUBJECTS_DIR/cortical.stl >> $SUBJECTS_DIR/final.stl
         sed '/solid vcg/d' $SUBJECTS_DIR/subcortical.stl >> $SUBJECTS_DIR/final.stl
         echo 'endsolid '$SUBJECTS_DIR'/final.stl' >> $SUBJECTS_DIR/final.stl
+    else
+        echo "[3Dprinting_brain] stl_boolean union succeeded!"
     fi
 else
     # Just copy the cortical model
