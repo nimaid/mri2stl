@@ -30,7 +30,7 @@ We are interested in the line that looks like `http://(0d0e3db6f247 or 127.0.0.1
 
 Copy the `127.0.0.1` and everything after it. Then paste it into your web browser, and remove the right parentheses right of the `127.0.0.1`.
 
-The URL should look something like this: `127.0.0.1:8888/?token=b9596f04a97c1ae9c2b02dd1877568f5ea20c805aa1199fa`. Go ahead and go to the URL.
+The URL should look something like this: `127.0.0.1:8888/?token=b9596f04a97c1ae9c2b02dd1877568f5ea20c805aa1199fa`. **Make a note of this somewhere** and then go to the URL.
 
 If it all worked well, you should see the "Jupyter" logo up top, and a list of files.
 
@@ -83,4 +83,10 @@ Converting your brain will take quite a few hours to complete (anywhere from 8 h
 
 The conversion process will attempt to run a boolean union on the cortical and subcortical models. If this cannot be done, the meshes are simply concatenated. Both should be read the same to a 3D printer, but the boolean union actually makes everything a single mesh if it succeeds.
 
-To download files, tick the box left of the item in question, then click the `Download` button which appears in the upper left.
+To download files (like your shiny new `.stl`), tick the box left of the item in question, then click the `Download` button which appears in the upper left.
+
+Once you have all the files you want to save downloaded, you can kill the server by clicking `Quit` in the upper right corner. When you do this, all files uploaded or created that were not downloaded will be forever lost, so be careful!
+
+If you close your browser without clicking `Quit`, the image will still be running in the background. You can reconnect by going to the same URL which you initially noted down. (You did note it down, right?)
+
+The other way to kill the server is to shutdown the Docker container manually. You would use `docker ps` to get the ID of it, then `docker rm -f ps`. This will also permenently delete all files uploaded/created.
