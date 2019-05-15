@@ -89,4 +89,4 @@ Once you have all the files you want to save downloaded, you can kill the server
 
 If you close your browser without clicking `Quit`, the image will still be running in the background. You can reconnect by going to the same URL which you initially noted down. (You did note it down, right?)
 
-The other way to kill the server is to shutdown the Docker container manually. You would use `docker ps` to get the ID of it, then `docker rm -f ps`. This will also permenently delete all files uploaded/created.
+The other way to kill the server is to shutdown the Docker container manually. You would use `docker ps` to get the ID of it, then `docker rm -f [ID]`. This will also permenently delete all files uploaded/created.
