@@ -29,9 +29,17 @@ else
     if [[ $BASENAME == *.zip ]]
     then
         (
-        # Move, unzip, and delete DICOM image archive
-        mkdir -v -p $DICOMDIR
-        mv -v $FILENAME $NEWDIR
+        # Create, or clean, folder
+        if [ ! -d $NEWDIR ]
+        then
+            mkdir -v -p $DICOMDIR
+        else
+            rm -v -rf $NEWDIR/*
+            mkdir -v $DICOMDIR
+        fi
+        
+        # Copy, unzip, and delete DICOM image archive
+        cp -v $FILENAME $NEWDIR
         unzip $NEWDIR/$BASENAME -d $DICOMDIR
         rm -v $NEWDIR/$BASENAME
         

@@ -32,14 +32,38 @@ The URL should look something like this: `127.0.0.1:8888/?token=b9596f04a97c1ae9
 
 If it all worked well, you should see the "Jupyter" logo up top, and a list of files.
 
+Now you will need to select the scan to upload. When you get an MRI study done, they usually take several sets of images. Not all image sets are created equal! Many only capture a small section of the brain, or don't have enough images for a good recreation, or the images don't show the brain's structure clearly enough, or it's too low of a resolution, or...
+
+Yeah, there's a lot that can go wrong. So when selecting an image set, here are some good criterion to meet, in order of importance:
+* The entire brain must be captured, from the subcortical base to the tip of the skull
+* The slices must very clearly slow the folds and internal structures of the brain
+* The brain must clearly have a gap between it and the skull in most of the slices
+* With more slices, more detail and accuracy can be achieved in the final output
+* Higher resolution images are better
+  * Try for at least 350x350
+  * Lower resolutions can fail outright
+
+Below is the scan I used [to make this 3D model](https://www.thingiverse.com/thing:3610884). It is 400x512, with 160 slices. This is the scan that I found in my study that worked the best (it's `test_scan.zip`):
+<img src="https://raw.githubusercontent.com/nimaid/mri2stl/master/images/test_scan.png" alt="A Perfect Scan" />
+
+The images will most likely either be in what's called `DICOM` formatting, or `NIfTI` formatting. `DICOM` image sets are usually a folder filled with a bunch of numbered files, usually with no extension. `NIfTI` image sets are a single file with a `.nii` file extension.
+
+Neither of these image formats are supported by your computer by default, but the CD they gave you with your MRI data on it usually has a viewer program that works for Windows. Alternatively, you could [use this very handy website](http://bit.ly/PapayaViewer) which supports every file format, even the non-mesh 3D surfaces behind the scenes of FreeSurfer!
+
+Find the best image set of your study, using the above rubric. If your image set is in `DICOM` format, you must pack them into a `.zip` file, in the main directory (NOT a sub-folder!). Here is the file structure expected:
+* my_scan.zip
+  * IMG000001
+  * IMG000002
+  * IMG000003
+  * ...
+
+When you have either your `DICOM` `.zip` file, or your `NIfTI` `.nii` file ready to go, go back to the Jupyter dashboard. Click the `Upload` button left of the `New` button. After selecting your file, it will prompt you a second time in the file browser, click the blue `Upload` button.
+
 Now, in the upper right, click `New > Terminal`. Here, you can use the following commands to create an .stl of the surface of the brain from medical imaging data:
 * `dicom2stl`
-  * Takes a .zip file with the DICOM images from a head study in the parent directory.
+  * Takes a .zip file with the `DICOM` images from a head study in the main directory.
 * `nii2stl`
-  * Takes a .nii file with the NIfTI images from a head study in the parent directory.
-* `mri2stl`
-  * If you had run `nii2stl` or `dicom2stl` and the job got interrupted, you can restart the job by passing just the name (no `.nii` or `.zip`) of the file you passed in.
-  * So if you ran `dicom2stl.sh SE000004.zip`, you could re-start that job from the beginning with `mri2stl.sh SE000004`.
+  * Takes a .nii file with the `NIfTI` images from a head study.
 
 All of these commands, if they complete successfully, should copy the final .stl to the main directory, `brain_[NAME]_[CORTICAL]_[SMOOTH].stl`, where:
 * `[NAME]` is the name of the input file.
@@ -50,12 +74,10 @@ All of these commands, if they complete successfully, should copy the final .stl
   * `smooth` if smoothed
   * `raw` if smoothing failed
 
-You can test the program by running the following command:
+An example command, to convert the included `DICOM` test scan into a surface brain model, would be `dicom2stl test_scan.zip`.
 
-`dicom2stl test_scan.zip`
+Converting your brain will take quite a few hours to complete (anywhere from 8 hours to a couple days, depending). I recommend you configure your Docker daemon to use most if not all of your CPU's cores.
 
-This will take quite a few hours to complete (anywhere from 8 hours to a couple days depending). I recommend you configure your Docker daemon to use most if not all of your CPU's cores.
-
-If you want to use your own file, use the `Upload` button left of the `New` button. After selecting the file, it will prompt you again in the file browser, click the blue `Upload` button.
+The conversion process will attempt to run a boolean union on the cortical and subcortical models. If this cannot be done, the meshes are simply concatenated. Both should be read the same to a 3D printer, but the boolean union actually makes everything a single mesh if it succeeds.
 
 To download files, tick the box left of the item in question, then click the `Download` button which appears in the upper left.

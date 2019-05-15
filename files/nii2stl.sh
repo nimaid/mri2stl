@@ -14,9 +14,17 @@ else
     if [[ $BASENAME == *.nii ]]
     then
         (
-        # Move the .nii to the correct place
-        mkdir -v -p $NEWDIR/input
-        mv -v $FILENAME $NEWDIR/input/struct.nii
+        # Clean folder
+        if [ ! -d $NEWDIR ]
+        then
+            mkdir -v -p $NEWDIR/input
+        else
+            rm -v -rf $NEWDIR/*
+            mkdir -v $NEWDIR/input
+        fi
+        
+        # Copy the .nii to the correct place
+        cp -v $FILENAME $NEWDIR/input/struct.nii
         
         # Convert the prepared file to an .stl file
         mri2stl $SCANNAME
