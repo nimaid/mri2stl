@@ -49,7 +49,7 @@ Yeah, there's a lot that can go wrong. So when selecting an image set, here are 
 
 Below is the scan I used [to make this 3D model](https://www.thingiverse.com/thing:3610884). It is 400x512, with 160 slices. This is the scan that I found in my study that worked the best (it's `test_scan.zip`):
 
-<img src="https://github.com/nimaid/mri2stl/raw/master/images/test_scan.gif" alt="A Perfect Scan" />
+<p align="center"><img src="https://github.com/nimaid/mri2stl/raw/master/images/test_scan.gif" alt="A Perfect Scan" /></p>
 
 The images will most likely either be in what's called `DICOM` formatting, or `NIfTI` formatting. `DICOM` image sets are usually a folder filled with a bunch of numbered files, usually with no extension. `NIfTI` image sets are a single file with a `.nii` file extension.
 
