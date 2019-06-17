@@ -47,8 +47,8 @@ RUN apt-get update && \
         python-pip \
         python-setuptools && \
     ldconfig && \
-    apt-get clean -y && \
     apt-get autoremove -y && \
+    apt-get clean -y && \
     rm -rf /var/lib/apt/lists/* /tmp/*
 COPY ./files/freesurfer_license.txt /usr/local/freesurfer/license.txt
 
