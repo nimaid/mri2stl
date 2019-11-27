@@ -39,7 +39,7 @@ After Docker downloads the latest image, you should get something like the follo
 ```
 We are interested in the line that looks like `http://(0d0e3db6f247 or 127.0.0.1):8888/?token=b9596f04a97c1ae9c2b02dd1877568f5ea20c805aa1199fa`. The 48 letters/numbers after `token=` will be different each time. Select these 48 letters/numbers and copy them to your clipboard. (May be just right clicking on it, or it may be `right click > Copy...`, depending on your OS. **Remember, `CTRL-C` kills the server!**)
 
-In your browser, navigate to the URL `127.0.0.1:8888`. It will prompt you for a token, you can `CTRL-V` the token you copied previously and hit `OK`.
+In your browser, navigate to the URL `127.0.0.1:8888`. It will prompt you for a token, you can `CTRL-V` the token you copied previously and click `Log in`.
 
 If it all worked, you should see the "Jupyter" logo up top, and a list of files.
 
