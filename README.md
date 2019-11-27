@@ -17,7 +17,7 @@ When you try to run an image in Docker, it will automatically download the lates
 
 `launch.sh` (Linux) **or** `launch.bat` (Win)
 
-This runs the image in the foreground, so that closing the command window or pressing CTRL-C kills server. This is equivalent to the command `docker run --rm -it -p 8888:8888 nimaid/mri2stl`
+This runs the image in the foreground, so that closing the command window or pressing `CTRL-C` kills server. This is equivalent to the command `docker run --rm -it -p 8888:8888 nimaid/mri2stl`
 
 **Be aware that killing the server immediately and permanently erases all data you may have uploaded or created. Please be careful and save your work before killing the server.**
 
@@ -37,21 +37,21 @@ After Docker downloads the latest image, you should get something like the follo
     Or copy and paste one of these URLs:
         http://(0d0e3db6f247 or 127.0.0.1):8888/?token=b9596f04a97c1ae9c2b02dd1877568f5ea20c805aa1199fa
 ```
-We are interested in the line that looks like `http://(0d0e3db6f247 or 127.0.0.1):8888/?token=b9596f04a97c1ae9c2b02dd1877568f5ea20c805aa1199fa`. The `token=` part will be different each time.
+We are interested in the line that looks like `http://(0d0e3db6f247 or 127.0.0.1):8888/?token=b9596f04a97c1ae9c2b02dd1877568f5ea20c805aa1199fa`. The 48 letters/numbers after `token=` will be different each time. Select these 48 letters/numbers and copy them to your clipboard. (May be just right clicking on it, or it may be `right click > Copy...`, depending on your OS. **Remember, `CTRL-C` kills the server!**)
 
-Copy the `127.0.0.1` and everything after it. Then paste it into your web browser, and remove the right parentheses right of the `127.0.0.1`. The URL should look something like this: `127.0.0.1:8888/?token=b9596f04a97c1ae9c2b02dd1877568f5ea20c805aa1199fa`. **Make a note of this somewhere** and then go to the URL.
+In your browser, navigate to the URL `127.0.0.1:8888`. It will prompt you for a token, you can `CTRL-V` the token you copied previously and hit `OK`.
 
-If it all worked well, you should see the "Jupyter" logo up top, and a list of files.
+If it all worked, you should see the "Jupyter" logo up top, and a list of files.
 
 Now you will need to select the scan to upload. When you get an MRI study done, they usually take several sets of images. Not all image sets are created equal! Many only capture a small section of the brain, or don't have enough images for a good recreation, or the images don't show the brain's structure clearly enough, or it's too low of a resolution, or...
 
 Yeah, there's a lot that can go wrong. So when selecting an image set, here are some good criterion to meet, in order of importance:
 * The entire brain must be captured, from the subcortical base to the tip of the skull
-* The slices must very clearly slow the folds and internal structures of the brain
+* The slices must very clearly show the folds and internal structures of the brain
 * The brain must clearly have a gap between it and the skull in most of the slices
 * With more slices, more detail and accuracy can be achieved in the final output
 * Higher resolution images are better
-  * Try for at least 350x350
+  * Try for at minimum 350x350
   * Lower resolutions can fail outright
 
 Below is the scan I used [to make this 3D model](https://www.thingiverse.com/thing:3610884). It is 400x512, with 160 slices. This is the scan that I found in my study that worked the best (it's `test_scan.zip`):
@@ -77,7 +77,7 @@ Now, in the upper right, click `New > Terminal`. Here, you can use the following
 * `nii2stl`
   * Takes a `.nii` file with the `NIfTI` images from a head study.
 
-All of these commands, if they complete successfully, should copy the final `.stl` to the main directory, `brain_[NAME]_[CORTICAL]_[SMOOTH].stl`, where:
+All of these commands, if they complete successfully, will copy the final `.stl` to the main directory, `brain_[NAME]_[CORTICAL]_[SMOOTH].stl`, where:
 * `[NAME]` is the name of the input file.
 * `[CORTICAL]` is ether
   * `cortical` if only the cortical structure was captured.
