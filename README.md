@@ -19,6 +19,8 @@ When you try to run an image in Docker, it will automatically download the lates
 
 This runs the image in the foreground, so that closing the command window or pressing CTRL-C kills server. This is equivalent to the command `docker run --rm -it -p 8888:8888 nimaid/mri2stl`
 
+**Be aware that killing the server immediately and permanently erases all data you may have uploaded or created. Please be careful and save your work before killing the server.**
+
 *NOTE: If you want to run the image in the background (advanced), use the command `docker run --rm -p 8888:8888 nimaid/mri2stl`. You will have to manually kill the server, either through the GUI or through `docker` commands.*
 
 After Docker downloads the latest image, you should get something like the following:
