@@ -1,18 +1,25 @@
 # mri2stl
-A Docker image for converting head MRI data to a 3D surface model of the brain.
+A Docker image for painlessly converting head MRI data to a 3D surface model of the brain.
 
 [Modified from miykael/3dprintyourbrain](https://github.com/miykael/3dprintyourbrain)
 
 <a href="https://www.thingiverse.com/thing:3632075/"><p align="center"><img src="https://github.com/nimaid/mri2stl/raw/master/images/mri2stl.png" width=600px /></p></a>
+
+## Motivations
+I had a head study done, and because I was the curious type, my doctor informed me I could get my medical records for free on a CD. So I naturally did so immediately after the study, and then I started my journey to create a 3D model of my brain from many black and white medical images. [This has been done well before](https://github.com/miykael/3dprintyourbrain), but it was still a *headache* to set up. ;) Also, non-Linux users are left out in the rain, that is unless they want to setup a VM, install a Linux distro, then finally go through the awful setup. There had to be a better way.
+
+Enter Docker! It's sort of like a VM, but it runs way faster, and doesn't take any time to set up. Just download and run, like you might do with a cross-platform Java (`.jar`) file. It creates a virtual computer environment that has the OS and all the files + installed programs that you need for your program! This is my Docker "image" with everything you need already set up for turning `DICOM`/`NIfTI` image sets into a `.stl` 3D model, ready for printing or other uses. You can do this with only one dead-simple command! You use it through your browser, through something very cool called a Jypyter notebook.
 
 ## Instructions
 Install Docker for your platform. This will literally be the hardest step of the whole process, and it's different for each OS. You can learn more [here](https://hub.docker.com/), and through Google.
 
 When you try to run an image in Docker, it will automatically download the latest version of that image if it's not already on your local computer. You can run the server as follows:
 
-**CTRL-C kills server:** `docker run --rm -it -p 8888:8888 nimaid/mri2stl` (This is the command in `launch.sh` and `launch.bat`.)
+`launch.sh` (Linux) **or** `launch.bat` (Win)
 
-**CTRL-C sends to BG (kill server manually):** `docker run --rm -p 8888:8888 nimaid/mri2stl`
+This runs the image in the foreground, so that  the command window or pressing CTRL-C kills server. This is equivilant to the command `docker run --rm -it -p 8888:8888 nimaid/mri2stl`
+
+*NOTE: If you want to run the image in the background (advanced), use the command `docker run --rm -p 8888:8888 nimaid/mri2stl`. You will have to manually kill the server, either through the GUI or through `docker` commands.*
 
 After Docker downloads the latest image, you should get something like the following:
 ```
@@ -28,11 +35,9 @@ After Docker downloads the latest image, you should get something like the follo
     Or copy and paste one of these URLs:
         http://(0d0e3db6f247 or 127.0.0.1):8888/?token=b9596f04a97c1ae9c2b02dd1877568f5ea20c805aa1199fa
 ```
-We are interested in the line that looks like `http://(0d0e3db6f247 or 127.0.0.1):8888/?token=b9596f04a97c1ae9c2b02dd1877568f5ea20c805aa1199fa`.
+We are interested in the line that looks like `http://(0d0e3db6f247 or 127.0.0.1):8888/?token=b9596f04a97c1ae9c2b02dd1877568f5ea20c805aa1199fa`. The `token=` part will be different each time.
 
-Copy the `127.0.0.1` and everything after it. Then paste it into your web browser, and remove the right parentheses right of the `127.0.0.1`.
-
-The URL should look something like this: `127.0.0.1:8888/?token=b9596f04a97c1ae9c2b02dd1877568f5ea20c805aa1199fa`. **Make a note of this somewhere** and then go to the URL.
+Copy the `127.0.0.1` and everything after it. Then paste it into your web browser, and remove the right parentheses right of the `127.0.0.1`. The URL should look something like this: `127.0.0.1:8888/?token=b9596f04a97c1ae9c2b02dd1877568f5ea20c805aa1199fa`. **Make a note of this somewhere** and then go to the URL.
 
 If it all worked well, you should see the "Jupyter" logo up top, and a list of files.
 
