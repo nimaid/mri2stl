@@ -11,7 +11,7 @@ I had a head study done, and because I was the curious type, my doctor informed 
 Enter Docker! It's sort of like a VM, but it runs way faster, and doesn't take any time to set up. Just download and run, like you might do with a cross-platform Java (`.jar`) file. It creates a virtual computer environment that has the OS and all the files + installed programs that you need for your program! This is my Docker "image" with everything you need already set up for turning `DICOM`/`NIfTI` image sets into an `.stl` 3D model, ready for printing or other uses. You can do this with only one dead-simple command! You use it through your browser, through something very cool called a Jypyter notebook.
 
 ## Instructions
-Install Docker for your platform. This will literally be the hardest step of the whole process, and it's different for each OS. You can learn more [here](https://hub.docker.com/), and through Google.
+Install Docker for your platform. This will literally be the only hard step of the whole process, and it's different for each OS. You can learn more [here](https://hub.docker.com/), and through Google. Don't panic! It's still pretty easy, especially on Windows. 
 
 When you try to run an image in Docker, it will automatically download the latest version of that image if it's not already on your local computer. You can run the server as follows:
 
