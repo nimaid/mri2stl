@@ -15,7 +15,7 @@ Install Docker for your platform. This will literally be the only hard step of t
 
 When you try to run an image in Docker, it will automatically download the latest version of that image if it's not already on your local computer. You can run the server as follows:
 
-`launch.sh` (Linux) **or** `launch.bat` (Win)
+`launch.bash` (Linux) **or** `launch.bat` (Win)
 
 This runs the image in the foreground, so that closing the command window or pressing `CTRL-C` kills server. This is equivalent to the command `docker run --rm -it -p 8888:8888 nimaid/mri2stl`
 
