@@ -23,7 +23,7 @@ RUN apt-get update && \
         file \
         bzip2 \
         python-pip \
-        python-setuptools gcc&& \
+        python-setuptools gcc && \
     python2.7 -m pip --no-cache-dir install --upgrade \
         jupyter jupyterlab && \
     
