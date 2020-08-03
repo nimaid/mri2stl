@@ -12,6 +12,7 @@ RUN apt-get update && \
         dcm2niix \
         meshlab \
         python2.7 \
+        python2.7-dev \
         libpng-dev \
         libmng-dev \
         libgomp1 \
@@ -22,10 +23,14 @@ RUN apt-get update && \
         file \
         bzip2 \
         python-pip \
-        python-setuptools && \
+        python-setuptools gcc&& \
     python2.7 -m pip --no-cache-dir install --upgrade \
-        jupyter && \
-
+        jupyter jupyterlab && \
+    
+    # Make JupyterLab start in dark mode
+    mkdir --parents /root/.jupyter/lab/user-settings/\@jupyterlab/apputils-extension && \
+    printf "{\n    \"theme\": \"JupyterLab Dark\"\n}" > /root/.jupyter/lab/user-settings/\@jupyterlab/apputils-extension/themes.jupyterlab-settings && \
+    
     # FreeSurfer installation.
     wget --no-check-certificate -P /tmp/ https://surfer.nmr.mgh.harvard.edu/pub/dist/freesurfer/6.0.0/freesurfer-Linux-centos6_x86_64-stable-pub-v6.0.0.tar.gz && \
     tar -C /usr/local -xzvf /tmp/freesurfer-Linux-centos6_x86_64-stable-pub-v6.0.0.tar.gz && \
@@ -52,16 +57,15 @@ RUN apt-get update && \
     rm -rf /var/lib/apt/lists/* /tmp/*
 COPY ./files/freesurfer_license.txt /usr/local/freesurfer/license.txt
 
+# Copy scripts.
+COPY ./scripts/* /usr/bin/
+RUN chmod +x /usr/bin/*
+
 # Copy files.
 COPY ./files/smoothing.mlx /3dprintscript/scans/
 COPY ./files/test_scan.zip /3dprintscript/
 
-COPY ./files/*.bash /usr/bin/
-RUN cd /usr/bin/ && \
-    chmod +x ./*.bash && \
-    find -type f -name '*.bash' -print0 | while read -d $'\0' f; do mv "$f" "${f%.bash}"; done
-
 # Prepare Jupyter Notebook server.
 WORKDIR /3dprintscript
 EXPOSE 8888
-CMD export SHELL=/bin/bash && jupyter notebook --ip=0.0.0.0 --port=8888 --no-browser --allow-root && exit
+CMD export SHELL=/bin/bash && jupyter lab --ip=0.0.0.0 --port=8888 --no-browser --allow-root --NotebookApp.token= && exit

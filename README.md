@@ -10,9 +10,18 @@ I had a head study done, and because I was the curious type, my doctor informed 
 
 Enter Docker! It's sort of like a VM, but it runs way faster, and doesn't take any time to set up. Just download and run, like you might do with a cross-platform Java (`.jar`) file. It creates a virtual computer environment that has the OS and all the files + installed programs that you need for your program! This is my Docker "image" with everything you need already set up for turning `DICOM`/`NIfTI` image sets into an `.stl` 3D model, ready for printing or other uses. You can do this with only one dead-simple command! You use it through your browser, through something very cool called a Jypyter notebook.
 
-## Instructions
+## Installing and Running
+To run the Docker image:
+* Install Docker on your computer
+* Run the command `docker run --rm -it -p 8888:8888 nimaid/mri2stl`
+* Go to `127.0.0.1:8888` in your web browser
+<details><summary>Detailed Instructions for Beginners</summary>
+<p>
+
+### Install Docker
 Install Docker for your platform. This will literally be the only hard step of the whole process, and it's different for each OS. You can learn more [here](https://hub.docker.com/), and through Google. Don't panic! It's still pretty easy, especially on Windows. 
 
+### Start the server
 When you try to run an image in Docker, it will automatically download the latest version of that image if it's not already on your local computer. You can run the server as follows:
 
 `launch.bash` (Linux) **or** `launch.bat` (Win)
@@ -23,7 +32,7 @@ This runs the image in the foreground, so that closing the command window or pre
 
 *NOTE: If you want to run the image in the background (advanced), use the command `docker run --rm -p 8888:8888 nimaid/mri2stl`. You will have to manually kill the server, either through the GUI or through `docker` commands.*
 
-After Docker downloads the latest image, you should get something like the following:
+After Docker downloads the latest image, the server will start running and you should see something like the following:
 ```
 [I 22:39:57.565 NotebookApp] Writing notebook server cookie secret to /root/.local/share/jupyter/runtime/notebook_cookie_secret
 [I 22:39:57.728 NotebookApp] Serving notebooks from local directory: /3dprintscript
@@ -37,12 +46,14 @@ After Docker downloads the latest image, you should get something like the follo
     Or copy and paste one of these URLs:
         http://(0d0e3db6f247 or 127.0.0.1):8888/?token=b9596f04a97c1ae9c2b02dd1877568f5ea20c805aa1199fa
 ```
-We are interested in the line that looks like `http://(0d0e3db6f247 or 127.0.0.1):8888/?token=b9596f04a97c1ae9c2b02dd1877568f5ea20c805aa1199fa`. The 48 letters/numbers after `token=` will be different each time. Select these 48 letters/numbers and copy them to your clipboard. (May be just right clicking on it, or it may be `right click > Copy...`, depending on your OS. **Remember, `CTRL-C` kills the server!**)
 
-In your browser, navigate to the URL `127.0.0.1:8888`. It will prompt you for a token, you can `CTRL-V` the token you copied previously and click `Log in`.
+### Go to the Server's Website
+You can now **minimize (not close)** the command line window. In your browser, navigate to the URL `127.0.0.1:8888`. You should see it load a website.
 
-If it all worked, you should see the "Jupyter" logo up top, and a list of files.
+</p>
+</details>
 
+## Making the actual 3D model
 Now you will need to select the scan to upload. When you get an MRI study done, they usually take several sets of images. Not all image sets are created equal! Many only capture a small section of the brain, or don't have enough images for a good recreation, or the images don't show the brain's structure clearly enough, or it's too low of a resolution, or...
 
 Yeah, there's a lot that can go wrong. So when selecting an image set, here are some good criterion to meet, in order of importance:
@@ -69,9 +80,9 @@ Find the best image set of your study, using the above rubric. If your image set
   * IMG000003
   * ...
 
-When you have either your `DICOM` `.zip` file, or your `NIfTI` `.nii` file ready to go, go back to the Jupyter dashboard. Click the `Upload` button left of the `New` button. After selecting your file, it will prompt you a second time in the file browser, click the blue `Upload` button.
+When you have either your `DICOM` `.zip` file, or your `NIfTI` `.nii` file ready to go, go back to the browser. In the upper left, click the `Upload` button which looks like an up arrow with a line behind it. Select your file and it will be uploaded to the server for processing.
 
-Now, in the upper right, click `New > Terminal`. Here, you can use the following commands to create an `.stl` of the surface of the brain from medical imaging data:
+Now, click `Terminal` in the `Other` category. Here, you can use the following commands to create an `.stl` of the surface of the brain from medical imaging data:
 * `dicom2stl`
   * Takes a `.zip` file with the `DICOM` images from a head study in the main directory.
 * `nii2stl`
@@ -90,12 +101,12 @@ An example command, to convert the included `DICOM` test scan into a `.stl`, wou
 
 Converting your brain will take quite a few hours to complete (anywhere from 8 hours to a couple days, depending). I recommend you configure your Docker daemon to use most if not all of your CPU's cores.
 
-To download files (like your shiny new `.stl`), tick the box left of the item in question, then click the `Download` button which appears in the upper left.
+To download files (like your shiny new `.stl`), right click the file in the browser to the left and select `Download`.
 
 Once you have all the files you want to save downloaded, you can kill the server by clicking `Quit` in the upper right corner. When you do this, all files uploaded or created that were not downloaded will be forever lost, so be careful!
 
-If you close your browser without clicking `Quit`, the image will still be running in the background. You can reconnect by going to the same URL which you initially noted down. (You did note it down, right?)
+If you close your browser without clicking `Quit`, the image will still be running in the background. You can reconnect by going to `127.0.0.1:8888`.
 
 The other way to kill the server is to shutdown the Docker container manually. You would use `docker ps` to get the ID of it, then `docker rm -f [ID]`. This will also permenently delete all files uploaded/created.
 
-The conversion process concatenates the two cortical hemispheres and subcortical models, then trys to smooth them together. This means that you can seperate your brain into it's seperate parts by using a 3D editing program (like [Blender](https://www.blender.org/)) to seperate the disconnected meshes ("loose parts" in Blender). If you try and print it as a whole, your printer should print just one solid object, no issues.
+The conversion process concatenates the two cortical hemispheres and subcortical models, then trys to smooth them together. This means that you can seperate your brain into it's constituent parts by using a 3D editing program (like [Blender](https://www.blender.org/)) to seperate the disconnected meshes ("loose parts" in Blender). If you try and print it as a whole, your printer should print just one solid object, no issues.
