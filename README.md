@@ -56,7 +56,7 @@ You can now **minimize (not close)** the command line window. In your browser, n
 ## Making the actual 3D model
 Now you will need to select the scan to upload. When you get an MRI study done, they usually take several sets of images. Not all image sets are created equal! Many only capture a small section of the brain, or don't have enough images for a good recreation, or the images don't show the brain's structure clearly enough, or it's too low of a resolution, or...
 
-Yeah, there's a lot that can go wrong. So when selecting an image set, here are some good criterion to meet, in order of importance:
+Yeah, there's a lot that can go wrong. So when selecting an image set, here are some good criteria to meet, in order of importance:
 * The entire brain must be captured, from the subcortical base to the tip of the skull
 * The slices must very clearly show the folds and internal structures of the brain
 * The brain must clearly have a gap between it and the skull in most of the slices
